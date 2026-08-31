@@ -1,27 +1,48 @@
-# Notes English Shadow
+# Kity
 
-A small, offline macOS menu-bar app that shows one English cue after a known Chinese phrase is committed in Apple Notes.
+Kity is a tiny macOS menu-bar companion for Apple Notes. After you commit a Chinese word or phrase, it shows an English learning cue beside the caret.
 
-## Requirements and build
+## What it does
 
-- macOS 14 or later
-- Xcode 15 or later
-- Apple Notes (`com.apple.Notes`) as the only supported editor
+- Supports Apple Notes only.
+- Keeps your existing Chinese input method unchanged.
+- Uses Apple's on-device Chinese-to-English Translation framework for every cue.
+- Does not bundle a dictionary, make network requests, modify notes, or record keystrokes.
+- Reads at most 48 UTF-16 units immediately before the caret while Notes is frontmost; the text stays in memory only.
 
-Open `NotesEnglishShadow.xcodeproj`, select the `NotesEnglishShadow` scheme, set your signing team and bundle identifier, then build. From Terminal on a Mac:
+## Requirements
+
+- macOS 26 or later
+- Xcode 26 or later
+- Apple Notes
+- Accessibility permission for Kity
+- Downloaded Simplified Chinese and English translation languages
+
+## Download the offline translation languages
+
+Open **System Settings → General → Language & Region → Translation Languages**, then download **Chinese (Simplified)** and **English**. The system models are managed by macOS; Kity does not include or upload them.
+
+## Build
+
+1. Open `NotesEnglishShadow.xcodeproj` in Xcode.
+2. Select the app target, set a signing team and a unique bundle identifier.
+3. Build and run.
+4. Grant Accessibility permission in **System Settings → Privacy & Security → Accessibility**.
+
+Or run tests from Terminal:
 
 ```sh
-xcodebuild -project NotesEnglishShadow.xcodeproj -scheme NotesEnglishShadow -destination 'platform=macOS' test
+xcodebuild test -project NotesEnglishShadow.xcodeproj -scheme NotesEnglishShadow -destination 'platform=macOS'
 ```
-
-The app requests Accessibility permission only. After granting it in System Settings → Privacy & Security → Accessibility, restart the app. It needs no Input Monitoring, Screen Recording, Automation, or network permission.
 
 ## Privacy
 
-The app runs only while Notes is frontmost. It reads at most 48 UTF-16 units immediately before the caret, keeps that bounded context in memory only, and persists only settings plus lexicon IDs and timestamps. It does not record keystrokes, modify Notes, log note text, or connect to the internet.
+Kity is active only while Notes is the frontmost app. It does not need Input Monitoring, Screen Recording, Automation, or network permission. Translation requests are handled by downloaded macOS language models.
 
-Apple may change Notes accessibility behavior in a future macOS release; compatibility cannot be guaranteed.
+## Publishing notes
 
-## Distribution
+Do not upload `xcode-derived/`, `DerivedData/`, signing certificates, profiles, or an ad-hoc signed `.app`. The included `.gitignore` excludes these artifacts.
 
-For release, use a real reverse-DNS bundle identifier, enable your Developer ID signing identity, archive with Hardened Runtime, and notarize the result. Do not distribute an ad-hoc signed build as a finished product.
+## Attribution
+
+The repository retains `LICENSES/LEXICON-NOTICE.md` and the optional legacy lexicon sources for attribution and reproducibility. The shipped pure-translation build does not bundle or query that lexicon.
