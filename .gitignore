@@ -1,0 +1,10 @@
+.DS_Store
+DerivedData/
+xcode-derived/
+*.xcuserstate
+xcuserdata/
+build/
+*.dSYM
+__pycache__/
+*.pyc
+NotesEnglishShadow/Resources/Lexicon.json
