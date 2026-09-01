@@ -14,6 +14,20 @@ enum HanText {
         return String(characters.reversed())
     }
 
+    static func lastHanRun(in text: String) -> String {
+        var characters: [Character] = []
+        var foundHan = false
+        for character in text.reversed() {
+            if isHanCharacter(character) {
+                foundHan = true
+                characters.append(character)
+            } else if foundHan {
+                break
+            }
+        }
+        return String(characters.reversed())
+    }
+
     private static func isHanCharacter(_ character: Character) -> Bool {
         character.unicodeScalars.allSatisfy { scalar in
             switch scalar.value {

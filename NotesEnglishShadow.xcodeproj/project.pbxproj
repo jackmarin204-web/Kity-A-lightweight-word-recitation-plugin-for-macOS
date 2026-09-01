@@ -30,11 +30,16 @@
 		AA0000000000000000000012 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0000000000000000000016 /* ApplicationServices.framework */; };
 		AA0000000000000000000016 /* NativeTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0000000000000000000020 /* NativeTranslator.swift */; };
 		AA0000000000000000000017 /* Translation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0000000000000000000021 /* Translation.framework */; };
+		AA0000000000000000000018 /* CaretWordDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0000000000000000000022 /* CaretWordDetector.swift */; };
+		AA0000000000000000000019 /* CaretCandidateRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0000000000000000000023 /* CaretCandidateRouter.swift */; };
 		BA0000000000000000000001 /* HanTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0000000000000000000001 /* HanTextTests.swift */; };
 		BA0000000000000000000002 /* CommitResolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0000000000000000000002 /* CommitResolverTests.swift */; };
 		BA0000000000000000000003 /* LexiconStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0000000000000000000003 /* LexiconStoreTests.swift */; };
 		BA0000000000000000000004 /* WordResolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0000000000000000000004 /* WordResolverTests.swift */; };
 		BA0000000000000000000005 /* LearningStateStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0000000000000000000005 /* LearningStateStoreTests.swift */; };
+		BA0000000000000000000006 /* CaretWordDetectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0000000000000000000006 /* CaretWordDetectorTests.swift */; };
+		BA0000000000000000000007 /* CaretCandidateRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0000000000000000000007 /* CaretCandidateRouterTests.swift */; };
+		BA0000000000000000000008 /* MenuBarControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0000000000000000000008 /* MenuBarControllerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,11 +80,16 @@
 		CA0000000000000000000019 /* KityMenuBarCat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KityMenuBarCat.png; sourceTree = "<group>"; };
 		CA0000000000000000000020 /* NativeTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeTranslator.swift; sourceTree = "<group>"; };
 		CA0000000000000000000021 /* Translation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Translation.framework; path = System/Library/Frameworks/Translation.framework; sourceTree = SDKROOT; };
+		CA0000000000000000000022 /* CaretWordDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaretWordDetector.swift; sourceTree = "<group>"; };
+		CA0000000000000000000023 /* CaretCandidateRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaretCandidateRouter.swift; sourceTree = "<group>"; };
 		CB0000000000000000000001 /* HanTextTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HanTextTests.swift; sourceTree = "<group>"; };
 		CB0000000000000000000002 /* CommitResolverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitResolverTests.swift; sourceTree = "<group>"; };
 		CB0000000000000000000003 /* LexiconStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexiconStoreTests.swift; sourceTree = "<group>"; };
 		CB0000000000000000000004 /* WordResolverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordResolverTests.swift; sourceTree = "<group>"; };
 		CB0000000000000000000005 /* LearningStateStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningStateStoreTests.swift; sourceTree = "<group>"; };
+		CB0000000000000000000006 /* CaretWordDetectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaretWordDetectorTests.swift; sourceTree = "<group>"; };
+		CB0000000000000000000007 /* CaretCandidateRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaretCandidateRouterTests.swift; sourceTree = "<group>"; };
+		CB0000000000000000000008 /* MenuBarControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarControllerTests.swift; sourceTree = "<group>"; };
 		CE0000000000000000000001 /* NotesEnglishShadow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotesEnglishShadow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE0000000000000000000002 /* NotesEnglishShadowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotesEnglishShadowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -160,6 +170,8 @@
 				CA000000000000000000000B /* WordResolver.swift */,
 				CA000000000000000000000C /* LearningStateStore.swift */,
 				CA0000000000000000000020 /* NativeTranslator.swift */,
+				CA0000000000000000000022 /* CaretWordDetector.swift */,
+				CA0000000000000000000023 /* CaretCandidateRouter.swift */,
 			);
 			path = Learning;
 			sourceTree = "<group>";
@@ -194,6 +206,9 @@
 				CB0000000000000000000003 /* LexiconStoreTests.swift */,
 				CB0000000000000000000004 /* WordResolverTests.swift */,
 				CB0000000000000000000005 /* LearningStateStoreTests.swift */,
+				CB0000000000000000000006 /* CaretWordDetectorTests.swift */,
+				CB0000000000000000000007 /* CaretCandidateRouterTests.swift */,
+				CB0000000000000000000008 /* MenuBarControllerTests.swift */,
 			);
 			path = NotesEnglishShadowTests;
 			sourceTree = "<group>";
@@ -338,6 +353,8 @@
 				AA000000000000000000000B /* WordResolver.swift in Sources */,
 				AA000000000000000000000C /* LearningStateStore.swift in Sources */,
 				AA0000000000000000000016 /* NativeTranslator.swift in Sources */,
+				AA0000000000000000000018 /* CaretWordDetector.swift in Sources */,
+				AA0000000000000000000019 /* CaretCandidateRouter.swift in Sources */,
 				AA000000000000000000000D /* HintPanel.swift in Sources */,
 				AA000000000000000000000E /* HintPanelController.swift in Sources */,
 				AA000000000000000000000F /* MenuBarController.swift in Sources */,
@@ -354,6 +371,9 @@
 				BA0000000000000000000003 /* LexiconStoreTests.swift in Sources */,
 				BA0000000000000000000004 /* WordResolverTests.swift in Sources */,
 				BA0000000000000000000005 /* LearningStateStoreTests.swift in Sources */,
+				BA0000000000000000000006 /* CaretWordDetectorTests.swift in Sources */,
+				BA0000000000000000000007 /* CaretCandidateRouterTests.swift in Sources */,
+				BA0000000000000000000008 /* MenuBarControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

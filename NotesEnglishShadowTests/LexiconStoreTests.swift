@@ -83,9 +83,9 @@ final class LexiconStoreTests: XCTestCase {
         let controller = try String(contentsOf: controllerURL, encoding: .utf8)
 
         XCTAssertTrue(controller.contains("KityMenuBarCat"))
-        XCTAssertTrue(controller.contains("NSSize(width: 20, height: 20)"))
+        XCTAssertTrue(controller.contains("NSSize(width: 22, height: 22)"))
         XCTAssertFalse(controller.contains("makeStatusIcon()"))
-        XCTAssertTrue(controller.contains("isTemplate = true"))
+        XCTAssertTrue(controller.contains("isTemplate: false"))
     }
 
     private func loadBundledEntries() throws -> [LexiconEntry] {

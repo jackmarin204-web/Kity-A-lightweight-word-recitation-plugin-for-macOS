@@ -217,8 +217,8 @@ final class NotesSession {
         NSLog("NotesEnglishShadow session: fallback started")
         let timer = DispatchSource.makeTimerSource(queue: .main)
         timer.schedule(
-            deadline: .now() + .milliseconds(80),
-            repeating: .milliseconds(80)
+            deadline: .now() + .milliseconds(100),
+            repeating: .milliseconds(100)
         )
         timer.setEventHandler { [weak self] in
             guard let self,

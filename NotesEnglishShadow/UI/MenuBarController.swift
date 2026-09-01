@@ -1,5 +1,15 @@
 import AppKit
 
+struct MenuBarIconConfiguration {
+    static let `default` = MenuBarIconConfiguration(
+        size: NSSize(width: 22, height: 22),
+        isTemplate: false
+    )
+
+    let size: NSSize
+    let isTemplate: Bool
+}
+
 final class MenuBarController: NSObject {
     private let statusItem = NSStatusBar.system.statusItem(
         withLength: NSStatusItem.squareLength
@@ -29,9 +39,10 @@ final class MenuBarController: NSObject {
     private func configureStatusItem() {
         if let button = statusItem.button {
             let image = NSImage(named: "KityMenuBarCat")
-            image?.size = NSSize(width: 20, height: 20)
+            let configuration = MenuBarIconConfiguration.default
+            image?.size = configuration.size
             image?.accessibilityDescription = "Kity"
-            image?.isTemplate = true
+            image?.isTemplate = configuration.isTemplate
             button.image = image
         }
 

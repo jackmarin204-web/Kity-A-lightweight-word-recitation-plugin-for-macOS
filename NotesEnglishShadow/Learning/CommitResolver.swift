@@ -36,7 +36,7 @@ enum CommitResolver {
             return nil
         }
 
-        let insertedHan = HanText.trailingHanRun(in: insertedSuffix)
+        let insertedHan = HanText.lastHanRun(in: insertedSuffix)
         guard !insertedHan.isEmpty else { return nil }
 
         return Commit(

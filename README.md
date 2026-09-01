@@ -1,5 +1,7 @@
 # Kity
 
+[中文说明](README.zh-CN.md)
+
 Kity is a tiny macOS menu-bar companion for Apple Notes. After you commit a Chinese word or phrase, it shows an English learning cue beside the caret.
 
 ## What it does
@@ -46,3 +48,5 @@ Do not upload `xcode-derived/`, `DerivedData/`, signing certificates, profiles, 
 ## Attribution
 
 The repository retains `LICENSES/LEXICON-NOTICE.md` and the optional legacy lexicon sources for attribution and reproducibility. The shipped pure-translation build does not bundle or query that lexicon.
+
+App icon: <a href="https://www.flaticon.com/free-icons/cat-food" title="cat food icons">Cat food icons created by Magnific - Flaticon</a>

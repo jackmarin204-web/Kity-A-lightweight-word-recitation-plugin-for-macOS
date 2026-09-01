@@ -13,4 +13,8 @@ final class HanTextTests: XCTestCase {
         XCTAssertEqual(HanText.trailingHanRun(in: "today我很累"), "我很累")
         XCTAssertEqual(HanText.trailingHanRun(in: "我很好。"), "")
     }
+
+    func testLastHanRunIgnoresCommittedPunctuationAndNewline() {
+        XCTAssertEqual(HanText.lastHanRun(in: "人工智能、\n"), "人工智能")
+    }
 }

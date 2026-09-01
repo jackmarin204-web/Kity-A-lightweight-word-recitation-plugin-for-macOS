@@ -19,8 +19,9 @@ final class AppEnvironment {
     private let defaults: UserDefaults
     private let hintPanelController = HintPanelController()
     private let nativeTranslator = NativeTranslator()
+    private let wordResolver: WordResolver
     private var translationRequestID = 0
-    private var previousSnapshot: TextSnapshot?
+    private var candidateRouter = CaretCandidateRouter()
     private var probeWorkItem: DispatchWorkItem?
     private var settingsObserver: NSObjectProtocol?
     private var trusted = false
@@ -47,6 +48,37 @@ final class AppEnvironment {
 
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
+        let localEntries = [
+            ("尼加拉瓜", "Nicaragua"),
+            ("人工智能", "artificial intelligence"),
+            ("人类学", "anthropology"),
+            ("红薯", "sweet potato"),
+            ("泥巴", "mud"),
+            ("信仰", "faith"),
+            ("备忘录", "Notes"),
+            ("炒蛋", "scrambled eggs"),
+            ("西瓜", "watermelon"),
+            ("黄瓜", "cucumber"),
+            ("茄子", "eggplant"),
+            ("南瓜", "pumpkin"),
+            ("鸡腿", "chicken leg"),
+            ("力量", "strength"),
+            ("哲学", "philosophy"),
+            ("手机", "phone"),
+            ("太阳", "sun"),
+            ("胡萝卜", "carrot"),
+            ("番茄", "tomato"),
+            ("土豆", "potato"),
+            ("火车", "train")
+        ].map {
+            LexiconEntry(
+                hanzi: $0.0,
+                englishHint: $0.1,
+                partOfSpeech: "word",
+                confidence: 1.0
+            )
+        }
+        wordResolver = WordResolver(store: try! LexiconStore(entries: localEntries))
         defaults.register(defaults: [
             "enabled": true,
             "fadeDuration": 3.0
@@ -113,7 +145,7 @@ final class AppEnvironment {
             resetTransientState()
             if let element,
                notesSession.isNotesFrontmost {
-                previousSnapshot = TextProbe.snapshot(from: element)
+                scheduleProbe(element: element)
             }
         case .geometryChanged:
             resetTransientState()
@@ -127,7 +159,7 @@ final class AppEnvironment {
         }
         probeWorkItem = workItem
         DispatchQueue.main.asyncAfter(
-            deadline: .now() + .milliseconds(45),
+            deadline: .now() + .milliseconds(40),
             execute: workItem
         )
     }
@@ -148,32 +180,31 @@ final class AppEnvironment {
             return
         }
 
-        let previous = previousSnapshot
-        previousSnapshot = current
-        guard let previous else {
-            NSLog("NotesEnglishShadow probe: baseline captured")
-            return
-        }
-        guard let commit = CommitResolver.resolve(previous: previous, current: current) else {
-            NSLog("NotesEnglishShadow probe: no committed insertion")
+        guard let candidate = candidateRouter.takeNewCandidate(
+            context: current.contextBeforeCaret,
+            caret: current.caretRange.location
+        ) else {
             return
         }
         translationRequestID += 1
         let requestID = translationRequestID
-        let candidate = String(HanText.trailingHanRun(in: commit.trailingContext).suffix(12))
-        guard candidate.count >= 2 else { return }
-        nativeTranslator.translate(candidate) { [weak self] englishHint in
+        if let hint = wordResolver.resolve(in: current.contextBeforeCaret) {
+            nativeTranslator.cancel()
+            hintPanelController.show(hint: hint, snapshot: current)
+            return
+        }
+        nativeTranslator.translate(candidate.text) { [weak self] englishHint in
             guard let self,
                   requestID == self.translationRequestID,
                   let englishHint,
                   !englishHint.isEmpty else { return }
-            let anchor = (commit.trailingContext as NSString).range(
-                of: candidate,
+            let anchor = (current.contextBeforeCaret as NSString).range(
+                of: candidate.text,
                 options: .backwards
             )
             guard anchor.location != NSNotFound else { return }
             let entry = LexiconEntry(
-                hanzi: candidate,
+                hanzi: candidate.text,
                 englishHint: englishHint,
                 partOfSpeech: "translation",
                 confidence: 1.0
@@ -188,7 +219,7 @@ final class AppEnvironment {
     private func resetTransientState() {
         probeWorkItem?.cancel()
         probeWorkItem = nil
-        previousSnapshot = nil
+        candidateRouter.reset()
         translationRequestID += 1
         nativeTranslator.cancel()
         hintPanelController.hide()
