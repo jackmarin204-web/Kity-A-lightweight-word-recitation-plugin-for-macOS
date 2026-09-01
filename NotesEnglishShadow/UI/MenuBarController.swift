@@ -2,7 +2,7 @@ import AppKit
 
 struct MenuBarIconConfiguration {
     static let `default` = MenuBarIconConfiguration(
-        size: NSSize(width: 22, height: 22),
+        size: NSSize(width: 20, height: 20),
         isTemplate: false
     )
 

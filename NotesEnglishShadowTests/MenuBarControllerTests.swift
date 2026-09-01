@@ -7,6 +7,6 @@ final class MenuBarControllerTests: XCTestCase {
         let configuration = MenuBarIconConfiguration.default
 
         XCTAssertFalse(configuration.isTemplate)
-        XCTAssertEqual(configuration.size, NSSize(width: 22, height: 22))
+        XCTAssertEqual(configuration.size, NSSize(width: 20, height: 20))
     }
 }

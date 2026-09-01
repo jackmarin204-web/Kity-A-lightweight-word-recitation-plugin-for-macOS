@@ -83,7 +83,7 @@ final class LexiconStoreTests: XCTestCase {
         let controller = try String(contentsOf: controllerURL, encoding: .utf8)
 
         XCTAssertTrue(controller.contains("KityMenuBarCat"))
-        XCTAssertTrue(controller.contains("NSSize(width: 22, height: 22)"))
+        XCTAssertTrue(controller.contains("NSSize(width: 20, height: 20)"))
         XCTAssertFalse(controller.contains("makeStatusIcon()"))
         XCTAssertTrue(controller.contains("isTemplate: false"))
     }
